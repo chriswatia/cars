@@ -101,7 +101,7 @@ class CarsController extends Controller
             'founded'=>$request->input('founded'),
             'description'=>$request->input('description'),
         ]);
- 
+
         return redirect('/cars');
     }
 

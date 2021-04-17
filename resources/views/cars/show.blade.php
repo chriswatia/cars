@@ -7,7 +7,7 @@
                 {{ $car->name }}
             </h1>
         </div>
-        <div class="py-10 text-center">            
+        <div class="py-10 text-center">
             <div class="m-auto">
                 <span class="uppercase text-blue-500 font-bold text-xs italic">
                     Founded: {{ $car->founded }}
@@ -15,22 +15,38 @@
                 <p class="text-lg text-gray-700 py-6">
                     {{ $car->description }}
                 </p>
-                <ul >
-                    <p class="text-lg text-gray-700 py-3">
-                        Models:
-                    </p>
-                    @forelse ($car->carModels as $model)
-                        <li class="inline italic taxt-gray-600 px-1 py-6">
-                            {{ $model['model_name'] }}
-                        </li>
+
+                <table class="auto">
+                    <tr class="bg-blue-100">
+                        <th class="w-1/2 border-4 border-gray-500">
+                            Model
+                        </th>
+                        <th class="w-1/2 border-4 border-gray-500">
+                            Engines
+                        </th>
+                    </tr>
+                    @forelse($car->carModels as $model)
+                        <tr>
+                            <td class="border-4 border-gray-500">
+                                {{ $model->model_name }}
+                            </td>
+                            <td class="border-4 border-gray-500">
+                                @foreach($car->engines as $engine)
+                                    @if($model->id == $engine->model_id)
+                                        {{ $engine->engine_name }}
+                                    @endif
+                                @endforeach
+                            </td>
+                        </tr>
+
                     @empty
                         <p>
-                            No Models Found
+                            No car models found!
                         </p>
                     @endforelse
-                </ul>
+                </table>
                 <hr class="mt-4 mb-8">
-            </div>          
+            </div>
         </div>
     </div>
 @endsection
